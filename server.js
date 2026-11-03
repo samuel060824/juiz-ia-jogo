@@ -7,7 +7,14 @@ app.use(express.json({ limit: "2kb" }));
 
 const PORT = process.env.PORT || 3000;
 const GAME_SECRET = process.env.GAME_SECRET;
-
+console.log("DIAGNOSTICO API:", {
+    chaveExiste: Boolean(process.env.OPENAI_API_KEY),
+    comecaComSk: (process.env.OPENAI_API_KEY || "").startsWith("sk-"),
+    temEspacosExtras:
+        (process.env.OPENAI_API_KEY || "") !==
+        (process.env.OPENAI_API_KEY || "").trim(),
+    tamanho: (process.env.OPENAI_API_KEY || "").length
+});
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
     timeout: 20000,
